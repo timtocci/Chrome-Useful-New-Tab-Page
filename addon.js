@@ -355,4 +355,4 @@ window.onload = function(){
 	chrome.bookmarks.getRecent(80, getRecentlyBookmarked);
 	getRecentlyVisited();
 	initializeNavMenu();
-}
+};

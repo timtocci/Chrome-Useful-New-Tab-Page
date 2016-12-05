@@ -1,12 +1,17 @@
 {
   "name": "Useful New Tab Page",
-  "version": "1.1",
+  "version": "1.2",
   "description": "A useful new tab replacement.",
   "permissions": [
     "bookmarks",
 	"history",
-	"topSites"
+	"topSites",
+    "contextMenus"
   ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "options_page": "options.html",
   "chrome_url_overrides" : {
     "newtab": "MyNewTab.html"
   },
