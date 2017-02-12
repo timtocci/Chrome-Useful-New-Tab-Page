@@ -1,6 +1,6 @@
 {
   "name": "Useful New Tab Page",
-  "version": "1.2",
+  "version": "2.0",
   "description": "A useful new tab replacement.",
   "permissions": [
     "bookmarks",
