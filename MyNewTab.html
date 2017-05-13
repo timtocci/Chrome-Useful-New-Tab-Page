@@ -1,367 +1,382 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New Tab</title>
+	<title>New Tab</title>
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="css/kube.min.css" />
-    <script src="addon.js"></script>
+	<link rel="stylesheet" href="css/kube.min.css" />
+	<link rel="stylesheet" href="chromish.css" />
+	<script src="addon.js"></script>
 
 </head>
 <body>
 <header class="group">
-<nav class="navbar nav-fullwidth navbar-left">
-    <ul>
-        <li><a href="chrome://history" class="chromeurls">History</a></li>
-        <li><a href="chrome://bookmarks" class="chromeurls">Bookmarks</a></li>
-        <li><a href="chrome://downloads" class="chromeurls">Downloads</a></li>
-        <li><a href="chrome://settings" class="chromeurls">Settings</a></li>
-        <li><a href="chrome://extensions" class="chromeurls">Extensions</a></li>
-        <li><a href="chrome://apps" class="chromeurls">Apps</a></li>
-		<li></li>
-    </ul>
-</nav>
-<nav class="navbar navbar-right">
-	<ul>
-		<li><a href="https://twitter.com/">Twitter   </a></li>
-		<li><a href="https://facebook.com/">Facebook   </a></li>
-		<li><a href="https://mail.google.com/">Gmail   </a></li>
-		<li><a href="https://plus.google.com/">Google+   </a></li>
-		<li><a href="#">   </a></li>
-	</ul>
-</nav>
+	<nav class="navbar nav-fullwidth navbar-left">
+		<ul>
+			<li><a href="chrome://history" class="chromeurls">History</a></li>
+			<li><a href="chrome://bookmarks" class="chromeurls">Bookmarks</a></li>
+			<li><a href="chrome://downloads" class="chromeurls">Downloads</a></li>
+			<li><a href="chrome://settings" class="chromeurls">Settings</a></li>
+			<li><a href="chrome://extensions" class="chromeurls">Extensions</a></li>
+			<li><a href="chrome://apps" class="chromeurls">Apps</a></li>
+			<li></li>
+		</ul>
+	</nav>
+	<nav class="navbar navbar-right">
+		<ul>
+			<li><a href="https://twitter.com/">Twitter   </a></li>
+			<li><a href="https://facebook.com/">Facebook   </a></li>
+			<li><a href="https://mail.google.com/">Gmail   </a></li>
+			<li><a href="https://plus.google.com/">Google+   </a></li>
+			<li><a href="#">   </a></li>
+		</ul>
+	</nav>
 </header>
 <div class="units-row">
 
-<div class="unit-20">
-<nav class="nav">
-    <ul>
-		<li>Chrome Internal URLs
+	<div class="unit-10">
+		<nav class="nav">
 			<ul>
-				<li><a href="chrome://accessibility" class="chromeurls">accessibility</a></li>
-				<li><a href="chrome://appcache-internals" class="chromeurls">appcache-internals</a></li>
-				<li><a href="chrome://apps" class="chromeurls">apps</a></li>
-				<li><a href="chrome://blob-internals" class="chromeurls">blob-internals</a></li>
-				<li><a href="chrome://bookmarks" class="chromeurls">bookmarks</a></li>
-				<li><a href="chrome://cache" class="chromeurls">cache</a></li>
-				<li><a href="chrome://chrome" class="chromeurls">chrome</a></li>
-				<li><a href="chrome://chrome-urls" class="chromeurls">chrome-urls</a></li>
-				<li><a href="chrome://components" class="chromeurls">components</a></li>
-				<li><a href="chrome://conflicts" class="chromeurls">conflicts</a></li>
-				<li><a href="chrome://copresence" class="chromeurls">copresence</a></li>
-				<li><a href="chrome://crashes" class="chromeurls">crashes</a></li>
-				<li><a href="chrome://credits" class="chromeurls">credits</a></li>
-				<li><a href="chrome://devices" class="chromeurls">devices</a></li>
-				<li><a href="chrome://dns" class="chromeurls">dns</a></li>
-				<li><a href="chrome://downloads" class="chromeurls">downloads</a></li>
-				<li><a href="chrome://extensions" class="chromeurls">extensions</a></li>
-				<li><a href="chrome://flags" class="chromeurls">flags</a></li>
-				<li><a href="chrome://flash" class="chromeurls">flash</a></li>
-				<li><a href="chrome://gcm-internals" class="chromeurls">gcm-internals</a></li>
-				<li><a href="chrome://gpu" class="chromeurls">gpu</a></li>
-				<li><a href="chrome://help" class="chromeurls">help</a></li>
-				<li><a href="chrome://histograms" class="chromeurls">histograms</a></li>
-				<li><a href="chrome://history" class="chromeurls">history</a></li>
-				<li><a href="chrome://indexeddb-internals" class="chromeurls">indexeddb-internals</a></li>
-				<li><a href="chrome://inspect" class="chromeurls">inspect</a></li>
-				<li><a href="chrome://invalidations" class="chromeurls">invalidations</a></li>
-				<li><a href="chrome://local-state" class="chromeurls">local-state</a></li>
-				<li><a href="chrome://media-internals" class="chromeurls">media-internals</a></li>
-				<li><a href="chrome://memory" class="chromeurls">memory</a></li>
-				<li><a href="chrome://memory-internals" class="chromeurls">memory-internals</a></li>
-				<li><a href="chrome://nacl" class="chromeurls">nacl</a></li>
-				<li><a href="chrome://net-internals" class="chromeurls">net-internals</a></li>
-				<li><a href="chrome://newtab" class="chromeurls">newtab</a></li>
-				<li><a href="chrome://omnibox" class="chromeurls">omnibox</a></li>
-				<li><a href="chrome://password-manager-internals" class="chromeurls">password-manager-internals</a></li>
-				<li><a href="chrome://plugins" class="chromeurls">plugins</a></li>
-				<li><a href="chrome://policy" class="chromeurls">policy</a></li>
-				<li><a href="chrome://predictors" class="chromeurls">predictors</a></li>
-				<li><a href="chrome://print" class="chromeurls">print</a></li>
-				<li><a href="chrome://profiler" class="chromeurls">profiler</a></li>
-				<li><a href="chrome://quota-internals" class="chromeurls">quota-internals</a></li>
-				<li><a href="chrome://serviceworker-internals" class="chromeurls">serviceworker-internals</a></li>
-				<li><a href="chrome://settings" class="chromeurls">settings</a></li>
-				<li><a href="chrome://signin-internals" class="chromeurls">signin-internals</a></li>
-				<li><a href="chrome://stats" class="chromeurls">stats</a></li>
-				<li><a href="chrome://suggestions" class="chromeurls">suggestions</a></li>
-				<li><a href="chrome://sync-internals" class="chromeurls">sync-internals</a></li>
-				<li><a href="chrome://system" class="chromeurls">system</a></li>
-				<li><a href="chrome://terms" class="chromeurls">terms</a></li>
-				<li><a href="chrome://thumbnails" class="chromeurls">thumbnails</a></li>
-				<li><a href="chrome://tracing" class="chromeurls">tracing</a></li>
-				<li><a href="chrome://translate-internals" class="chromeurls">translate-internals</a></li>
-				<li><a href="chrome://user-actions" class="chromeurls">user-actions</a></li>
-				<li><a href="chrome://version" class="chromeurls">version</a></li>
-				<li><a href="chrome://view-http-cache" class="chromeurls">view-http-cache</a></li>
-				<li><a href="chrome://voicesearch" class="chromeurls">voicesearch</a></li>
-				<li><a href="chrome://webrtc-internals" class="chromeurls">webrtc-internals</a></li>
-				<li><a href="chrome://webrtc-logs" class="chromeurls">webrtc-logs</a></li>
+				<li>Chrome Internal URLs
+					<ul>
+						<li><a href="chrome://accessibility" class="chromeurls">accessibility</a></li>
+						<li><a href="chrome://appcache-internals" class="chromeurls">appcache-internals</a></li>
+						<li><a href="chrome://apps" class="chromeurls">apps</a></li>
+						<li><a href="chrome://blob-internals" class="chromeurls">blob-internals</a></li>
+						<li><a href="chrome://bookmarks" class="chromeurls">bookmarks</a></li>
+						<li><a href="chrome://cache" class="chromeurls">cache</a></li>
+						<li><a href="chrome://chrome" class="chromeurls">chrome</a></li>
+						<li><a href="chrome://chrome-urls" class="chromeurls">chrome-urls</a></li>
+						<li><a href="chrome://components" class="chromeurls">components</a></li>
+						<li><a href="chrome://conflicts" class="chromeurls">conflicts</a></li>
+						<li><a href="chrome://copresence" class="chromeurls">copresence</a></li>
+						<li><a href="chrome://crashes" class="chromeurls">crashes</a></li>
+						<li><a href="chrome://credits" class="chromeurls">credits</a></li>
+						<li><a href="chrome://devices" class="chromeurls">devices</a></li>
+						<li><a href="chrome://dns" class="chromeurls">dns</a></li>
+						<li><a href="chrome://downloads" class="chromeurls">downloads</a></li>
+						<li><a href="chrome://extensions" class="chromeurls">extensions</a></li>
+						<li><a href="chrome://flags" class="chromeurls">flags</a></li>
+						<li><a href="chrome://flash" class="chromeurls">flash</a></li>
+						<li><a href="chrome://gcm-internals" class="chromeurls">gcm-internals</a></li>
+						<li><a href="chrome://gpu" class="chromeurls">gpu</a></li>
+						<li><a href="chrome://help" class="chromeurls">help</a></li>
+						<li><a href="chrome://histograms" class="chromeurls">histograms</a></li>
+						<li><a href="chrome://history" class="chromeurls">history</a></li>
+						<li><a href="chrome://indexeddb-internals" class="chromeurls">indexeddb-internals</a></li>
+						<li><a href="chrome://inspect" class="chromeurls">inspect</a></li>
+						<li><a href="chrome://invalidations" class="chromeurls">invalidations</a></li>
+						<li><a href="chrome://local-state" class="chromeurls">local-state</a></li>
+						<li><a href="chrome://media-internals" class="chromeurls">media-internals</a></li>
+						<li><a href="chrome://memory" class="chromeurls">memory</a></li>
+						<li><a href="chrome://memory-internals" class="chromeurls">memory-internals</a></li>
+						<li><a href="chrome://nacl" class="chromeurls">nacl</a></li>
+						<li><a href="chrome://net-internals" class="chromeurls">net-internals</a></li>
+						<li><a href="chrome://newtab" class="chromeurls">newtab</a></li>
+						<li><a href="chrome://omnibox" class="chromeurls">omnibox</a></li>
+						<li><a href="chrome://password-manager-internals" class="chromeurls">password-manager-internals</a></li>
+						<li><a href="chrome://plugins" class="chromeurls">plugins</a></li>
+						<li><a href="chrome://policy" class="chromeurls">policy</a></li>
+						<li><a href="chrome://predictors" class="chromeurls">predictors</a></li>
+						<li><a href="chrome://print" class="chromeurls">print</a></li>
+						<li><a href="chrome://profiler" class="chromeurls">profiler</a></li>
+						<li><a href="chrome://quota-internals" class="chromeurls">quota-internals</a></li>
+						<li><a href="chrome://serviceworker-internals" class="chromeurls">serviceworker-internals</a></li>
+						<li><a href="chrome://settings" class="chromeurls">settings</a></li>
+						<li><a href="chrome://signin-internals" class="chromeurls">signin-internals</a></li>
+						<li><a href="chrome://stats" class="chromeurls">stats</a></li>
+						<li><a href="chrome://suggestions" class="chromeurls">suggestions</a></li>
+						<li><a href="chrome://sync-internals" class="chromeurls">sync-internals</a></li>
+						<li><a href="chrome://system" class="chromeurls">system</a></li>
+						<li><a href="chrome://terms" class="chromeurls">terms</a></li>
+						<li><a href="chrome://thumbnails" class="chromeurls">thumbnails</a></li>
+						<li><a href="chrome://tracing" class="chromeurls">tracing</a></li>
+						<li><a href="chrome://translate-internals" class="chromeurls">translate-internals</a></li>
+						<li><a href="chrome://user-actions" class="chromeurls">user-actions</a></li>
+						<li><a href="chrome://version" class="chromeurls">version</a></li>
+						<li><a href="chrome://view-http-cache" class="chromeurls">view-http-cache</a></li>
+						<li><a href="chrome://voicesearch" class="chromeurls">voicesearch</a></li>
+						<li><a href="chrome://webrtc-internals" class="chromeurls">webrtc-internals</a></li>
+						<li><a href="chrome://webrtc-logs" class="chromeurls">webrtc-logs</a></li>
+					</ul>
+				</li>
+
 			</ul>
-		</li>
-        
-    </ul>
-	
-</nav>
-</div>
-	
-	
-    <div class="unit-25">
+
+		</nav>
+	</div>
+
+
+	<div class="unit-25">
+		<!--
 		<p class="h4 color-gray-60 ">Search</p>
+		<hr>
+		-->
 		<form class="forms forms-inline">
+			<label for="txtSearch"><strong>Search</strong></label>
 			<input id="txtSearch" type="search" name="q" class="width-80" placeholder="Search for something" />
-			<span class="btn-append">
-				<button id="btnSearch" class="btn btn-smaller">Search</button>
-			</span>
+			<div class="button-container">
+				<button id="btnCreateSearchSet" class="">Create Search Set</button>
+				<button id="btnSearch">Search</button>
+			</div>
 			<p>
 			<p class="h5 color-gray-60 ">Search Settings</p>
 			<label>Web Search
-			<ul class="forms-inline-list">
-				<li>
-					<input type="checkbox" name="cbGoogle" id="cbGoogle" checked>
-					<label for="cbGoogle">Google</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbBing" id="cbBing">
-					<label for="cbBing">Bing</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbYahoo" id="cbYahoo">
-					<label for="cbYahoo">Yahoo</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbDuckDuckGo" id="cbDuckDuckGo">
-					<label for="cbDuckDuckGo">DuckDuckGo</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbExalead" id="cbExalead">
-					<label for="cbExalead">Exalead</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbGigablast" id="cbGigablast">
-					<label for="cbGigablast">Gigablast</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbFaroo" id="cbFaroo">
-					<label for="cbFaroo">Faroo</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbQwant" id="cbQwant">
-					<label for="cbQwant">Qwant</label>
-				</li>
-				
-				<li>
-					<input type="checkbox" name="cbYandex" id="cbYandex">
-					<label for="cbYandex">Yandex</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbBaidu" id="cbBaidu">
-					<label for="cbBaidu">Baidu</label>
-				</li>
-				
-			</ul>
+				<ul class="forms-inline-list">
+					<li>
+						<input type="checkbox" name="cbGoogle" id="cbGoogle" checked>
+						<label for="cbGoogle">Google</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbBing" id="cbBing">
+						<label for="cbBing">Bing</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbYahoo" id="cbYahoo">
+						<label for="cbYahoo">Yahoo</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbDuckDuckGo" id="cbDuckDuckGo">
+						<label for="cbDuckDuckGo">DuckDuckGo</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbExalead" id="cbExalead">
+						<label for="cbExalead">Exalead</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbGigablast" id="cbGigablast">
+						<label for="cbGigablast">Gigablast</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbFaroo" id="cbFaroo">
+						<label for="cbFaroo">Faroo</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbQwant" id="cbQwant">
+						<label for="cbQwant">Qwant</label>
+					</li>
+
+					<li>
+						<input type="checkbox" name="cbYandex" id="cbYandex">
+						<label for="cbYandex">Yandex</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbBaidu" id="cbBaidu">
+						<label for="cbBaidu">Baidu</label>
+					</li>
+
+				</ul>
 			</label>
-			
+
 			<label>Metasearch
-			<ul class="forms-inline-list">
-				<li>
-					<input type="checkbox" name="cbHotbot" id="cbHotbot">
-					<label for="cbHotbot">Hotbot</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbDogpile" id="cbDogpile">
-					<label for="cbDogpile">Dogpile</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbWebcrawler" id="cbWebcrawler">
-					<label for="cbWebcrawler">Webcrawler</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbExcite" id="cbExcite">
-					<label for="cbExcite">Excite</label>
-				</li>
-				
-			</ul>
+				<ul class="forms-inline-list">
+					<li>
+						<input type="checkbox" name="cbHotbot" id="cbHotbot">
+						<label for="cbHotbot">Hotbot</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbDogpile" id="cbDogpile">
+						<label for="cbDogpile">Dogpile</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbWebcrawler" id="cbWebcrawler">
+						<label for="cbWebcrawler">Webcrawler</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbExcite" id="cbExcite">
+						<label for="cbExcite">Excite</label>
+					</li>
+
+				</ul>
 			</label>
-			
+
 			<label>Social
-			<ul class="forms-inline-list">
-				<li>
-					<input type="checkbox" name="cbFacebook" id="cbFacebook">
-					<label for="cbFacebook">Facebook</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbTwitter" id="cbTwitter">
-					<label for="cbTwitter">Twitter</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbGooglePlus" id="cbGooglePlus">
-					<label for="cbGooglePlus">Google+</label>
-				</li>
-				
-			</ul>
+				<ul class="forms-inline-list">
+					<li>
+						<input type="checkbox" name="cbFacebook" id="cbFacebook">
+						<label for="cbFacebook">Facebook</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbTwitter" id="cbTwitter">
+						<label for="cbTwitter">Twitter</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbGooglePlus" id="cbGooglePlus">
+						<label for="cbGooglePlus">Google+</label>
+					</li>
+
+				</ul>
 			</label>
 			<label>Shopping
-			<ul class="forms-inline-list">
-				<li>
-					<input type="checkbox" name="cbEbay" id="cbEbay">
-					<label for="cbEbay">Ebay</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbAmazon" id="cbAmazon">
-					<label for="cbAmazon">Amazon</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbAliExpress" id="cbAliExpress">
-					<label for="cbAliExpress">AliExpress</label>
-				</li>
-			</ul>
+				<ul class="forms-inline-list">
+					<li>
+						<input type="checkbox" name="cbEbay" id="cbEbay">
+						<label for="cbEbay">Ebay</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbAmazon" id="cbAmazon">
+						<label for="cbAmazon">Amazon</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbAliExpress" id="cbAliExpress">
+						<label for="cbAliExpress">AliExpress</label>
+					</li>
+				</ul>
 			</label>
 			<label>Images
-			<ul class="forms-inline-list">
-				<li>
-					<input type="checkbox" name="cbSmugmug" id="cbSmugmug">
-					<label for="cbSmugmug">Smugmug</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbFlickr" id="cbFlickr">
-					<label for="cbFlickr">Flickr</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbPhotobucket" id="cbPhotobucket">
-					<label for="cbPhotobucket">Photobucket</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbDeviantArt" id="cbDeviantArt">
-					<label for="cbDeviantArt">Deviant Art</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbImgur" id="cbImgur">
-					<label for="cbImgur">Imgur</label>
-				</li>
-				
-			</ul>
+				<ul class="forms-inline-list">
+					<li>
+						<input type="checkbox" name="cbSmugmug" id="cbSmugmug">
+						<label for="cbSmugmug">Smugmug</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbFlickr" id="cbFlickr">
+						<label for="cbFlickr">Flickr</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbPhotobucket" id="cbPhotobucket">
+						<label for="cbPhotobucket">Photobucket</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbDeviantArt" id="cbDeviantArt">
+						<label for="cbDeviantArt">Deviant Art</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbImgur" id="cbImgur">
+						<label for="cbImgur">Imgur</label>
+					</li>
+
+				</ul>
 			</label>
-			
+
 			<label>Video
-			<ul class="forms-inline-list">
-				<li>
-					<input type="checkbox" name="cbYouTube" id="cbYouTube">
-					<label for="cbYouTube">YouTube</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbVimeo" id="cbVimeo">
-					<label for="cbVimeo">Vimeo</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbGoogleVideo" id="cbGoogleVideo">
-					<label for="cbGoogleVideo">Google Video</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbBingVideo" id="cbBingVideo">
-					<label for="cbBingVideo">Bing Video</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbYahooVideo" id="cbYahooVideo">
-					<label for="cbYahooVideo">Yahoo Video</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbHulu" id="cbHulu">
-					<label for="cbHulu">Hulu</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbVeoh" id="cbVeoh">
-					<label for="cbVeoh">Veoh</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbBreak" id="cbBreak">
-					<label for="cbBreak">Break</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbMetacafe" id="cbMetacafe">
-					<label for="cbMetacafe">Metacafe</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbDailymotion" id="cbDailymotion">
-					<label for="cbDailymotion">Dailymotion</label>
-				</li>
-				
-				<li>
-					<input type="checkbox" name="cbWMHT" id="cbWMHT">
-					<label for="cbWMHT">WMHT (NY PBS)</label>
-				</li>
-				
-			</ul>
+				<ul class="forms-inline-list">
+					<li>
+						<input type="checkbox" name="cbYouTube" id="cbYouTube">
+						<label for="cbYouTube">YouTube</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbVimeo" id="cbVimeo">
+						<label for="cbVimeo">Vimeo</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbGoogleVideo" id="cbGoogleVideo">
+						<label for="cbGoogleVideo">Google Video</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbBingVideo" id="cbBingVideo">
+						<label for="cbBingVideo">Bing Video</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbYahooVideo" id="cbYahooVideo">
+						<label for="cbYahooVideo">Yahoo Video</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbHulu" id="cbHulu">
+						<label for="cbHulu">Hulu</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbVeoh" id="cbVeoh">
+						<label for="cbVeoh">Veoh</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbBreak" id="cbBreak">
+						<label for="cbBreak">Break</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbMetacafe" id="cbMetacafe">
+						<label for="cbMetacafe">Metacafe</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbDailymotion" id="cbDailymotion">
+						<label for="cbDailymotion">Dailymotion</label>
+					</li>
+
+					<li>
+						<input type="checkbox" name="cbWMHT" id="cbWMHT">
+						<label for="cbWMHT">WMHT (NY PBS)</label>
+					</li>
+
+				</ul>
 			</label>
-			
+
 			<label>Recipes
-			<ul class="forms-inline-list">
-				<li>
-					<input type="checkbox" name="cbFoodie" id="cbFoodie" >
-					<label for="cbFoodie">Foodie</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbYummly" id="cbYummly">
-					<label for="cbYummly">Yummly</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbGoogleRecipes" id="cbGoogleRecipes">
-					<label for="cbGoogleRecipes">Google Recipes</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbMyRecipes" id="cbMyRecipes">
-					<label for="cbMyRecipes">My Recipes</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbFood" id="cbFood">
-					<label for="cbFood">Food.com</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbCookingChannel" id="cbCookingChannel">
-					<label for="cbCookingChannel">Cooking Channel</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbEatingWell" id="cbEatingWell">
-					<label for="cbEatingWell">Eating Well</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbBettyCrocker" id="cbBettyCrocker">
-					<label for="cbBettyCrocker">Betty Crocker</label>
-				</li>
-				
-			</ul>
+				<ul class="forms-inline-list">
+					<li>
+						<input type="checkbox" name="cbFoodie" id="cbFoodie" >
+						<label for="cbFoodie">Foodie</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbYummly" id="cbYummly">
+						<label for="cbYummly">Yummly</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbGoogleRecipes" id="cbGoogleRecipes">
+						<label for="cbGoogleRecipes">Google Recipes</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbMyRecipes" id="cbMyRecipes">
+						<label for="cbMyRecipes">My Recipes</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbFood" id="cbFood">
+						<label for="cbFood">Food.com</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbCookingChannel" id="cbCookingChannel">
+						<label for="cbCookingChannel">Cooking Channel</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbEatingWell" id="cbEatingWell">
+						<label for="cbEatingWell">Eating Well</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbBettyCrocker" id="cbBettyCrocker">
+						<label for="cbBettyCrocker">Betty Crocker</label>
+					</li>
+
+				</ul>
 			</label>
-			
+
 			<label>Chrome Internal
-			<ul class="forms-inline-list">
-				<li>
-					<input type="checkbox" name="cbBookmarks" id="cbBookmarks" >
-					<label for="cbBookmarks">Bookmarks</label>
-				</li>
-				<li>
-					<input type="checkbox" name="cbHistory" id="cbHistory">
-					<label for="cbHistory">History</label>
-				</li>
-			</ul>
+				<ul class="forms-inline-list">
+					<li>
+						<input type="checkbox" name="cbBookmarks" id="cbBookmarks" >
+						<label for="cbBookmarks">Bookmarks</label>
+					</li>
+					<li>
+						<input type="checkbox" name="cbHistory" id="cbHistory">
+						<label for="cbHistory">History</label>
+					</li>
+				</ul>
 			</label>
-			
-			
+
+
 		</form>
 	</div>
 	<div class="unit-25">
 		<p class="h4 color-gray-60">Top Sites</p>
-		<div id="mostVisited_div"></div>
-	
+		<hr>
+		<div id="mostVisited_div" class="urllist"></div>
+
 		<p class="h4 color-gray-60">Recently Bookmarked</p>
-		<div id="recentlyBookmarked_div"></div>
+		<hr>
+		<div id="recentlyBookmarked_div" class="urllist"></div>
 	</div>
-	<div class="unit-25">
+	<div class="unit-20">
 		<p class="h4 color-gray-60">Recently Visited</p>
-		<div id="recentlyVisited_div"></div>
+		<hr>
+		<div id="recentlyVisited_div" class="urllist"></div>
 	</div>
-	
+	<div class="unit-20">
+		<button id="btnCreateTabSet"><strong>Create Tab Set</strong> </button>
+		<div id="tabsetdisplay">
+			<button>Hello World</button>
+			<button>Goodbye World</button>
+		</div>
+	</div>
 </div>
 
 </body>

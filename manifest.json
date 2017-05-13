@@ -1,12 +1,15 @@
 {
   "name": "Useful New Tab Page",
-  "version": "1.2",
+  "version": "2.0",
   "description": "A useful new tab replacement.",
   "permissions": [
     "bookmarks",
-	"history",
-	"topSites",
-    "contextMenus"
+    "history",
+    "topSites",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "<all_urls>"
   ],
   "background": {
     "scripts": ["background.js"]
@@ -16,10 +19,10 @@
     "newtab": "MyNewTab.html"
   },
   "icons" : {
-		"16" : "newtb_16.png",
-		"32" : "newtb_32.png",
-		"48" : "newtb_48.png",
-		"128" : "newtb_128.png"
-	},
+    "16" : "newtb_16.png",
+    "32" : "newtb_32.png",
+    "48" : "newtb_48.png",
+    "128" : "newtb_128.png"
+  },
   "manifest_version": 2
 }
