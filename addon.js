@@ -159,12 +159,12 @@ window.onload = function(){
 	});
 
 
-	// handle search box stuff
+	// handle search button
 	var searchbutton = document.getElementById('btnSearch');
 	searchbutton.addEventListener('click', function(e){
 		e.preventDefault();
 		var term = document.getElementById('txtSearch').value;
-
+		chrome.runtime.getBackgroundPage(function(bgPage) {});
 
 
 		//var settingsIdArray = ['cbGoogle', 'cbBing', 'cbYahoo', 'cbDuckDuckGo', 'cbExalead', 'cbGigablast', 'cbFaroo', 'cbQwant', 'cbYandex', 'cbBaidu', 'cbEbay', 'cbAmazon', 'cbAliExpress', 'cbBookmarks', 'cbHistory', 'cbYouTube', 'cbVimeo', 'cbGoogleVideo', 'cbBingVideo', 'cbYahooVideo', 'cbHulu', 'cbWMHT', 'cbVeoh', 'cbBreak', 'cbMetacafe', 'cbDailymotion', 'cbFacebook', 'cbTwitter', 'cbGooglePlus', 'cbFoodie', 'cbYummly', 'cbGoogleRecipes', 'cbMyRecipes', 'cbFood', 'cbCookingChannel', 'cbEatingWell', 'cbBettyCrocker', 'cbHotbot', 'cbDogpile', 'cbWebcrawler', 'cbExcite', 'cbSmugmug', 'cbFlickr', 'cbPhotobucket', 'cbDeviantArt', 'cbImgur'];
