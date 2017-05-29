@@ -319,13 +319,6 @@ var searchArray = [
         url:["http://www.yummly.com/recipes?q="]
     },
     {
-        id:"cbGoogleRecipes",
-        category: "Recipes",
-        active: 0,
-        label: "GoogleRecipes",
-        url:["https://www.google.com/search?q=", '&tbs=rcp%3A1']
-    },
-    {
         id:"cbMyRecipes",
         category: "Recipes",
         active: 0,
@@ -344,14 +337,14 @@ var searchArray = [
         category: "Recipes",
         active: 0,
         label: "CookingChannel",
-        url:["http://www.cookingchanneltv.com/search-results.html?searchTerm="]
+        url:["http://www.cookingchanneltv.com/search/", "-"]
     },
     {
         id:"cbEatingWell",
         category: "Recipes",
         active: 0,
         label: "EatingWell",
-        url:["http://www.eatingwell.com/search/apachesolr_search/"]
+        url:["http://www.eatingwell.com/search/results/?wt=","&sort=re"]
     },
     {
         id:"cbBettyCrocker",
@@ -359,13 +352,6 @@ var searchArray = [
         active: 0,
         label: "BettyCrocker",
         url:["http://www.bettycrocker.com/search/searchresults?term="]
-    },
-    {
-        id:"cbHotbot",
-        category: "Metasearch",
-        active: 0,
-        label: "Hotbot",
-        url:["http://www.hotbot.com/search/web?q=", "&keyvol=01e32e5055bc4ba0f3e4"]
     },
     {
         id:"cbDogpile",
