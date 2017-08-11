@@ -54,7 +54,7 @@ function getRecentlyVisited(){
 			var a = li.appendChild(document.createElement('a'));
 			a.href = url;
 			if(! title){
-				a.className = 'color-gray-50 smaller'
+				a.className = 'color-gray-50 smaller';
 				a.appendChild(document.createTextNode('-----NO TITLE-----'));
 			}else{
 				a.appendChild(document.createTextNode(title));
@@ -142,15 +142,15 @@ function initializeSearch(){
 		var categoryArr = [];
 		var inserthtml = "";
 		// fill the category array
-		for(const item of search_items_array){
+		for(let item of search_items_array){
 			if(categoryArr.lastIndexOf(item.category) === -1){
 				categoryArr.push(item.category);
 			}
 		}
 		// create the html to insert
-		for(const category of categoryArr){
+		for(let category of categoryArr){
 			inserthtml += '<label><strong>' + category + '</strong><ul class="forms-inline-list">';
-			for(const item of search_items_array){
+			for(let item of search_items_array){
 				if(item.category === category){
 					if(item.active){
 						inserthtml += `<li><input type="checkbox" name="${item.id}" id="${item.id}" checked><label for="${item.id}">${item.label}</label></li>`;
@@ -193,6 +193,16 @@ window.onload = function(){
 		openTabSet(e.target.textContent);
 	});
 
+
+
+	//let tabsetExpandos = $(".tabset_title_expand").
+
+
+
+
+
+
+
 	// initialize search pane
 	initializeSearch();
 
@@ -206,9 +216,9 @@ window.onload = function(){
 		}else{
 			var container = document.getElementById('search_settings_container');
 			var cbItems = container.getElementsByTagName('input');
-			for(const item of cbItems){
+			for(let item of cbItems){
 				if(item.type === 'checkbox' && item.checked){
-					for(const sitem of search_items_array){
+					for(let sitem of search_items_array){
 						if(item.id === sitem.id){
 							let url = sitem.url[0] + encodeURIComponent(term);
 							if(sitem.url.length > 1){
