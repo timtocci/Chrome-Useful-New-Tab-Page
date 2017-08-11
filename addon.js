@@ -226,6 +226,12 @@ window.onload = function () {
         replaceTab('tabsets.html');
     });
 
+
+
+
+
+
+    // ToDo: Add document nodes before this listener
     $(".tabset .tabset_title_expand").each(function(idx){
         $(this).bind("click", function(){
             $(this).children().each(function(){
@@ -236,7 +242,6 @@ window.onload = function () {
                     $(this).text("+");
                     hideTabsetItems(idx)
                 }
-
             }) ;
         })
     });
