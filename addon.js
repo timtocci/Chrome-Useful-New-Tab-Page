@@ -241,31 +241,6 @@ window.onload = function () {
         })
     });
 
-    //var tabsetdisplay = document.getElementById('tabset_display');
-    //let tabsets = tabsetdisplay.getElementsByClassName("tabset");
-    //
-    //for(let tabset of tabsets){
-    //    //console.log(tabset)
-    //    let items = tabset.getElementsByClassName("tabset_items");
-    //    //console.log(items[0])
-    //    items[0].addEventListener("click", function(evt){
-    //        console.log(evt)
-    //        evt.stopPropagation();
-    //        $(evt.target).toggle("display");
-    //    });
-    //}
-    //tabsetdisplay.addEventListener('click', function (e) {
-    //    e.stopPropagation();
-    //    openTabSet(e.target.textContent, e);
-    //});
-    //$("tabset").delegate(".tabset_title_expand", "click" , function (evt) {
-    //    //evt.stopPropagation();
-    //    //let tabsetdiv = $(evt.currentTarget).parent().parent();
-    //    //console.log(this);
-    //
-    //});
-
-
     // initialize search pane
     initializeSearch();
 
