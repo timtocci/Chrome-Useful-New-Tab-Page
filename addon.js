@@ -243,7 +243,11 @@ window.onload = function () {
                     hideTabsetItems(idx)
                 }
             }) ;
-        })
+        });
+        chrome.runtime.getBackgroundPage(function(bgpg){
+            //let suTS = bgpg.suTS;
+            //console.log(suTS)
+        });
     });
 
     // initialize search pane
