@@ -1,5 +1,5 @@
 /**
- * Created by Owner on 2/16/2017.
+ * Created by Timothy Tocci <timothytocci.com> on 2/16/2017.
  */
 let internal_titles = [
     "Accessibility Internals",
@@ -67,32 +67,68 @@ let internal_titles = [
     "About Version",
     "chrome://view-http-cache",
     "WebRTC Internals",
-    "WebRTC logs"
+    "WebRTC logs",
+    "Edit Tab Sets"
 ];
 
 $( document ).ready(function() {
     let objQueryInfo = {
         windowType: "normal"
     };
+    let tabs;
     chrome.tabs.query(objQueryInfo, function(tabArray){
-        console.log(tabArray);
-
-
-
+        tabs = tabArray;
+        //console.log(tabArray);
         $("ul.openurllist").html(function(){
             let rethtml = "";
             $.each(tabArray, function(index,obj){
-                rethtml += `<li>
-                    <input type="checkbox" name="${obj.title}" id="${obj.title}" checked>
+                let boolUnchecked = false;
+                for(let title of internal_titles){
+                    if(obj.title === title){
+                        boolUnchecked = true;
+                    }
+                }
+                if(boolUnchecked){
+                    rethtml += `<li>
+                    <input type="checkbox" class="openurl" name="${obj.title}" id="${obj.title}">
                     <label for="${obj.title}">${obj.title}</label>
                 </li>`
+                }else{
+                    rethtml += `<li>
+                    <input type="checkbox" class="openurl" name="${obj.title}" id="${obj.title}" checked>
+                    <label for="${obj.title}">${obj.title}</label>
+                </li>`
+                }
             });
             return rethtml;
         });
+
+        $("#btnSaveTabset").on("click",(evt)=>{
+            evt.preventDefault();
+            let tabset_data = {
+                name: $("#tabsetName")[0].value,
+                items: []
+            };
+            $(".openurl").each((ind,cb)=>{
+                if(cb.checked){
+                    $.each(tabs,(idx,tab)=>{
+                        if(tab.title === cb.name){
+                            let item = {
+                                title: tab.title,
+                                url: tab.url
+                            }
+                            tabset_data.items.push(item);
+
+                        }
+                    });
+
+                }
+            });
+            console.log(tabset_data);
+        });
+
     });
 
-    $("#btnSaveTabset").on("click",(evt)=>{
 
-    });
 
 });
