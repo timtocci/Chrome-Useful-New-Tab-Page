@@ -276,22 +276,16 @@ window.onload = function () {
         }
     });
 
-    // Message Plumbing
-    let port = chrome.runtime.connect({name: "tabsets"});
-    port.postMessage({type: "ready"});
-    port.onMessage.addListener(function(msg) {
-        switch(msg.type){
-            case "ready":
-                console.log(msg.payload);
-                break;
-            case "created_tabset":
-                console.log(msg.payload);
-        }
-        //if (msg.question == "Who's there?")
-        //    port.postMessage({answer: "Madame"});
-        //else if (msg.question == "Madame who?")
-        //    port.postMessage({answer: "Madame... Bovary"});
+    chrome.runtime.sendMessage({type: "ready"}, function(response) {
+        console.log(response.type);
     });
+    chrome.runtime.sendMessage({type: "delete_tabset"}, function(response) {
+        console.log(response.type);
+    });
+    chrome.runtime.sendMessage({type: "delete_tabset_item"}, function(response) {
+        console.log(response.type);
+    });
+
 
     // display links
     chrome.topSites.get(displayTopSites);

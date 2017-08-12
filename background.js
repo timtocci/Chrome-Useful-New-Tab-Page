@@ -11,7 +11,9 @@ class Emitter {
 
     constructor() {
         this._events = {};
-    };
+    }
+
+;
 
     /**
      * Adds a listener to the collection for a specified event.
@@ -28,7 +30,9 @@ class Emitter {
         this._events[event] = this._events[event] || [];
         this._events[event].push(listener);
         return this;
-    };
+    }
+
+;
 
     /**
      * Adds a one time listener to the collection for a specified event. It will execute only once.
@@ -54,7 +58,9 @@ class Emitter {
         this.on(event, fn);
 
         return this;
-    };
+    }
+
+;
 
     /**
      * Removes a listener from the collection for a specified event.
@@ -84,7 +90,9 @@ class Emitter {
         }
 
         return this;
-    };
+    }
+
+;
 
     /**
      * Removes all listeners from the collection for a specified event.
@@ -99,10 +107,13 @@ class Emitter {
     removeAllListeners(event) {
         try {
             delete this._events[event];
-        } catch(e) {}
+        } catch (e) {
+        }
 
         return this;
-    };
+    }
+
+;
 
     /**
      * Returns all listeners from the collection for a specified event.
@@ -117,8 +128,11 @@ class Emitter {
     listeners(event) {
         try {
             return this._events[event];
-        } catch(e) {}
-    };
+        } catch (e) {
+        }
+    }
+
+;
 
     /**
      * Execute each item in the listener collection in order with the specified data.
@@ -144,7 +158,9 @@ class Emitter {
         }
 
         return this;
-    };
+    }
+
+;
 
 }
 
@@ -157,7 +173,7 @@ class Emitter {
 /**
  * TabSets Class
  */
-class TabSets extends Emitter{
+class TabSets extends Emitter {
     constructor() {
         super();
         chrome.bookmarks.search("__private_newtabpage", (results)=> {
@@ -166,7 +182,7 @@ class TabSets extends Emitter{
                     for (let child of children) {
                         if (child.title = "tabsets") {
                             this.tabsets_folder = child;
-                            chrome.bookmarks.getChildren(child.id,(tss)=>{
+                            chrome.bookmarks.getChildren(child.id, (tss)=> {
                                 this.TABSETS = tss;
                                 // get children of each
                                 this.emit("ready", tss);
@@ -177,13 +193,16 @@ class TabSets extends Emitter{
             }
         })
     }
-    CreateTabSet(tabsetData){
+
+    CreateTabSet(tabsetData) {
 
     }
-    DeleteTabSet(tabsetId){
+
+    DeleteTabSet(tabsetId) {
 
     }
-    DeleteTabSetURL(URLId){
+
+    DeleteTabSetURL(URLId) {
 
     }
 }
@@ -667,44 +686,30 @@ function setupTabSets() {
     });
 }
 
-
-
-// Event Listener Plumbing
-chrome.runtime.onConnect.addListener(function(port) {
-    switch(port.name){
-        case "tabsets":
-            port.onMessage.addListener(function(msg) {
-                switch (msg.type){
-                    case "ready":
-                        let tabsets = new TabSets();
-                        tabsets.on("ready",(data)=>{
-                            port.postMessage({type:"ready", payload: data});
-                        });
-                        break;
-                    case "create_tabset":
-                        let tabsets = new TabSets();
-                        tabsets.on("ready",(data)=>{
-                            tabsets.CreateTabSet(msg.payload);
-                            tabsets.on("created_tabset", (tsdata)=>{
-                                port.postMessage({type:"created_tabset",payload:tsdata});
-                            });
-                        });
-                        break;
-                }
-            });
-            break;
-        default:
-        break;
+chrome.runtime.onMessage.addListener(
+    function (msg, sender, sendResponse) {
+        switch (msg.type) {
+            case "ready":
+                //
+                sendResponse({type:"ready_response"});
+                break;
+            case "create_tabset":
+                //
+                sendResponse({type:"create_tabset_response"});
+                break;
+            case "delete_tabset":
+                //
+                sendResponse({type:"delete_tabset_response"});
+                break;
+            case "delete_tabset_item":
+                //
+                sendResponse({type:"delete_tabset_item_response"});
+                break
+        }
+        // async response
+        return true;
     }
-    //port.onMessage.addListener(function(msg) {
-    //    if (msg.joke == "Knock knock")
-    //        port.postMessage({question: "Who's there?"});
-    //    else if (msg.answer == "Madame")
-    //        port.postMessage({question: "Madame who?"});
-    //    else if (msg.answer == "Madame... Bovary")
-    //        port.postMessage({question: "I don't get it."});
-    //});
-});
+);
 
 
 //setupTabSets();
