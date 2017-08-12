@@ -153,6 +153,41 @@ class Emitter {
 
  export default Emitter;*/
 
+
+/**
+ * TabSets Class
+ */
+class TabSets extends Emitter{
+    constructor() {
+        super();
+        chrome.bookmarks.search("__private_newtabpage", (results)=> {
+            for (let fldr of results) {
+                chrome.bookmarks.getChildren(fldr.id, (children)=> {
+                    for (let child of children) {
+                        if (child.title = "tabsets") {
+                            this.tabsets_folder = child;
+                            chrome.bookmarks.getChildren(child.id,(tss)=>{
+                                this.TABSETS = tss;
+                                // get children of each
+                                this.emit("ready", tss);
+                            })
+                        }
+                    }
+                })
+            }
+        })
+    }
+    CreateTabSet(tabsetData){
+
+    }
+    DeleteTabSet(tabsetId){
+
+    }
+    DeleteTabSetURL(URLId){
+
+    }
+}
+
 chrome.runtime.onInstalled.addListener((details)=> {
     switch (details.reason) {
         case "install":
@@ -620,7 +655,7 @@ function setupTabSets() {
         }
     });
     let fldr = {};
-    fldr.title = "__private_do_not_modify";
+    fldr.title = "__private_newtabpage";
     chrome.bookmarks.create(fldr, function (nodes) {
         console.log(nodes);
         let fldrTS = {};
@@ -631,36 +666,49 @@ function setupTabSets() {
         })
     });
 }
+
+
+
+// Event Listener Plumbing
+chrome.runtime.onConnect.addListener(function(port) {
+    switch(port.name){
+        case "tabsets":
+            port.onMessage.addListener(function(msg) {
+                switch (msg.type){
+                    case "ready":
+                        let tabsets = new TabSets();
+                        tabsets.on("ready",(data)=>{
+                            port.postMessage({type:"ready", payload: data});
+                        });
+                        break;
+                    case "create_tabset":
+                        let tabsets = new TabSets();
+                        tabsets.on("ready",(data)=>{
+                            tabsets.CreateTabSet(msg.payload);
+                            tabsets.on("created_tabset", (tsdata)=>{
+                                port.postMessage({type:"created_tabset",payload:tsdata});
+                            });
+                        });
+                        break;
+                }
+            });
+            break;
+        default:
+        break;
+    }
+    //port.onMessage.addListener(function(msg) {
+    //    if (msg.joke == "Knock knock")
+    //        port.postMessage({question: "Who's there?"});
+    //    else if (msg.answer == "Madame")
+    //        port.postMessage({question: "Madame who?"});
+    //    else if (msg.answer == "Madame... Bovary")
+    //        port.postMessage({question: "I don't get it."});
+    //});
+});
+
+
 //setupTabSets();
-class TabSets extends  Emitter{
-    constructor() {
-        super();
-        chrome.bookmarks.search("__private_do_not_modify", (results)=> {
-            for (let fldr of results) {
-                chrome.bookmarks.getChildren(fldr.id, (children)=> {
-                    for (let child of children) {
-                        if (child.title = "tabsets") {
-                            this.tabsets_folder = child;
-                            chrome.bookmarks.getChildren(child.id,(tss)=>{
-                                this.TABSETS = tss;
-                                // get children of each
-                                this.emit("ready", tss);
-                            })
-                        }
-                    }
-                })
-            }
-        })
-    }
-    CreateTabSet(tabsetData){
-
-    }
-    DeleteTabSet(tabsetId){
-
-    }
-    DeleteTabSetURL(URLId){
-
-    }
-}
-var tabsets = new TabSets();
-//tabsets.printTabsetFolderId();
+//tabsets.on("ready",(data)=>{
+//    console.log(data)
+//
+//});

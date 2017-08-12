@@ -57,6 +57,7 @@ function getRecentlyVisited() {
                 a.className = 'color-gray-50 smaller';
                 a.appendChild(document.createTextNode('-----NO TITLE-----'));
             } else {
+                title = title.substring(0,29) + "...";
                 a.appendChild(document.createTextNode(title));
             }
         }
@@ -110,7 +111,7 @@ function initializeNavMenu() {
  * Opens a tab set
  * @param name
  * @param evt
- */
+
 function openTabSet(name, evt) {
     name = name.trim();
     if(name == "+"){
@@ -145,8 +146,8 @@ function openTabSet(name, evt) {
             }
         });
     }
-
 }
+*/
 
 /**
  * Initializes the search pane
@@ -244,10 +245,6 @@ window.onload = function () {
                 }
             }) ;
         });
-        chrome.runtime.getBackgroundPage(function(bgpg){
-            //let suTS = bgpg.suTS;
-            //console.log(suTS)
-        });
     });
 
     // initialize search pane
@@ -277,7 +274,23 @@ window.onload = function () {
                 }
             }
         }
+    });
 
+    // Message Plumbing
+    let port = chrome.runtime.connect({name: "tabsets"});
+    port.postMessage({type: "ready"});
+    port.onMessage.addListener(function(msg) {
+        switch(msg.type){
+            case "ready":
+                console.log(msg.payload);
+                break;
+            case "created_tabset":
+                console.log(msg.payload);
+        }
+        //if (msg.question == "Who's there?")
+        //    port.postMessage({answer: "Madame"});
+        //else if (msg.question == "Madame who?")
+        //    port.postMessage({answer: "Madame... Bovary"});
     });
 
     // display links
