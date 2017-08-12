@@ -1,10 +1,77 @@
 /**
  * Created by Owner on 2/16/2017.
  */
-
+let internal_titles = [
+    "Accessibility Internals",
+    "Application Cache",
+    "Apps",
+    "Blob Storage Internals",
+    "Bluetooth Internals",
+    "Bookmarks",
+    "chrome://cache",
+    "Settings",
+    "Chrome URLs",
+    "Components",
+    "chrome://conflicts",
+    "Crashes",
+    "Credits",
+    "Device Log",
+    "Devices",
+    "chrome://dino/",
+    "About discards",
+    "About DNS",
+    "Downloads",
+    "Extensions",
+    "chrome://flags",
+    "chrome://flash",
+    "GCM Internals",
+    "chrome://gpu",
+    "Settings",
+    "About Histograms",
+    "History",
+    "IndexedDB",
+    "Inspect with Chrome Developer Tools",
+    "Invalidations",
+    "Local State Debug Page",
+    "Media Engagement",
+    "Media Internals",
+    "chrome://nacl",
+    "chrome://net-internals/#events",
+    "chrome://network-error/",
+    "Network errors",
+    "New Tab",
+    "NTP Tiles Internals",
+    "Omnibox Debug Page",
+    "Password Manager Internals",
+    "Policies",
+    "Predictors",
+    "chrome://print",
+    "chrome://profiler",
+    "Quota Internals",
+    "Safe Browsing",
+    "chrome://serviceworker-internals",
+    "Settings",
+    "Signin Internals",
+    "Site Engagement",
+    "Suggestions",
+    "Supervised User Internals",
+    "Sync Internals",
+    "About System",
+    "taskscheduler-internals",
+    "Google Chrome Terms of Service",
+    "TopSites Thumbnails",
+    "chrome://tracing",
+    "Translate Internals",
+    "USB Internals",
+    "User Actions Debug Page",
+    "About Version",
+    "chrome://view-http-cache",
+    "WebRTC Internals",
+    "WebRTC logs"
+];
 
 $( document ).ready(function() {
-    var objQueryInfo = {
+    let objQueryInfo = {
         windowType: "normal"
     };
     chrome.tabs.query(objQueryInfo, function(tabArray){
@@ -17,11 +84,15 @@ $( document ).ready(function() {
             $.each(tabArray, function(index,obj){
                 rethtml += `<li>
                     <input type="checkbox" name="${obj.title}" id="${obj.title}" checked>
-                    <label for="cbGoogle">${obj.title}</label>
+                    <label for="${obj.title}">${obj.title}</label>
                 </li>`
             });
             return rethtml;
         });
+    });
+
+    $("#btnSaveTabset").on("click",(evt)=>{
+
     });
 
 });
