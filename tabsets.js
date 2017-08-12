@@ -75,10 +75,7 @@ $( document ).ready(function() {
     let objQueryInfo = {
         windowType: "normal"
     };
-    let tabs;
     chrome.tabs.query(objQueryInfo, function(tabArray){
-        tabs = tabArray;
-        //console.log(tabArray);
         $("ul.openurllist").html(function(){
             let rethtml = "";
             $.each(tabArray, function(index,obj){
@@ -111,24 +108,18 @@ $( document ).ready(function() {
             };
             $(".openurl").each((ind,cb)=>{
                 if(cb.checked){
-                    $.each(tabs,(idx,tab)=>{
+                    $.each(tabArray,(idx,tab)=>{
                         if(tab.title === cb.name){
                             let item = {
                                 title: tab.title,
                                 url: tab.url
-                            }
+                            };
                             tabset_data.items.push(item);
-
                         }
                     });
-
                 }
             });
             console.log(tabset_data);
         });
-
     });
-
-
-
 });
