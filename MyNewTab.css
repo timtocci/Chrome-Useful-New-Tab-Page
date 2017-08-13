@@ -44,11 +44,11 @@
     height: 21px;
     text-align: center;
     border: 1px solid #999999;
-    visibility: hidden;
     margin-left: 1px;
     margin-top: 1px;
     margin-right: 1px;
     margin-bottom: 1px;
+    display:none;
 }
 .tabset_title_delete:hover{
     background-color: #ffdddd ;

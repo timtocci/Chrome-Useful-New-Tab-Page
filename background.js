@@ -733,11 +733,21 @@ chrome.runtime.onMessage.addListener(
                 break;
             case "delete_tabset":
                 //
-                sendResponse({type: "delete_tabset_response"});
+                tabsets = new TabSets();
+                tabsets.on("ready", ()=> {
+                    tabsets.DeleteTabSet(msg.payload, function(ts) {
+                        sendResponse({type: "delete_tabset_response", payload: ts});
+                    });
+                });
                 break;
             case "delete_tabset_item":
                 //
-                sendResponse({type: "delete_tabset_item_response"});
+                tabsets = new TabSets();
+                tabsets.on("ready", ()=> {
+                    tabsets.DeleteTabSetItem(msg.payload, function(ts) {
+                        sendResponse({type: "delete_tabset_item_response", payload: ts});
+                    });
+                });
                 break
         }
         // async response

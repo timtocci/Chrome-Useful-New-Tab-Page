@@ -108,48 +108,6 @@ function initializeNavMenu() {
 
 
 /**
- * Opens a tab set
- * @param name
- * @param evt
-
-function openTabSet(name, evt) {
-    name = name.trim();
-    if(name == "+"){
-
-        //$(evt.target).parent().parent().parent().children(".tabset_items").css("display", "block");
-        let tabitems = $(evt.target).parent().parent().parent().children(".tabset_items");
-        tabitems.css("display", "block");
-        evt.target.textContent = "-";
-
-    }else if(name == "-"){
-        //console.log(evt)
-        let tabitems = $(evt.target).parent().parent().parent().children(".tabset_items");
-        tabitems.css("display", "none");
-        evt.target.textContent = "+";
-    }
-    else{
-        console.log('openTabSet with ' + name);
-        var tabset;
-        chrome.runtime.getBackgroundPage(function (bgPage) {
-            var tabsets = bgPage.Me.db.TabSets;
-            if (tabsets) {
-                console.log(tabsets);
-                for (var i = 0; i < tabsets.length; i++) {
-                    if (tabsets[i].name === name) {
-                        tabset = tabsets[i];
-                        var urls = tabset.urls;
-                        for (var ii = 0; ii < urls.length; ii++) {
-                            chrome.tabs.create({url: urls[ii]});
-                        }
-                    }
-                }
-            }
-        });
-    }
-}
-*/
-
-/**
  * Initializes the search pane
  */
 function initializeSearch() {
@@ -185,66 +143,65 @@ function initializeSearch() {
 function showTabsetItems(index){
     $(".tabset .tabset_items").each(function (idx) {
         if(idx === index){
-            $(this).toggle("display")
+            $(this).toggle("display");
         }
     });
     $(".tabset .tabset_title_delete").each(function (idx) {
         if(idx === index){
-            $(this).css("visibility", "visible")
+            $(this).toggle("display");
         }
     });
 }
 function hideTabsetItems(index){
     $(".tabset .tabset_items").each(function (idx) {
         if(idx === index){
-            $(this).toggle("display")
+            $(this).toggle("display");
         }
     });
     $(".tabset .tabset_title_delete").each(function (idx) {
         if(idx === index){
-            $(this).css("visibility", "hidden")
+            $(this).toggle("display");
         }
     });
 }
 
 function createTabsetItems(itemsData){
-
-}
-window.onload = function () {
-    chrome.runtime.sendMessage({type: "ready"}, function(response) {
-        console.log(response.type);
-        console.log(response.payload);
-    });
-
-
-
-    var createbutton = document.getElementById('btnCreateSearchSet');
-    createbutton.addEventListener('click', function (e) {
-        e.preventDefault();
-        var objQueryInfo = {
-            windowType: "normal"
+    let htmlInsert = ``;
+    let tabset_urls = [];
+    for(let tabset of itemsData){
+        let tabset_url = {
+            id:tabset.id,
+            urls:[]
         };
-        chrome.runtime.getBackgroundPage(function (bgPage) {
-            chrome.tabs.query(objQueryInfo, function (tabArray) {
-                console.log(tabArray);
-                //bgPage.Me.tabs = tabArray;
-                replaceTab('searchsets.html');
-            });
-        });
-    });
-    var createtabsetbutton = document.getElementById('btnCreateTabSet');
-    createtabsetbutton.addEventListener('click', function (e) {
-        e.preventDefault();
-        replaceTab('tabsets.html');
-    });
+        htmlInsert += `<div class="tabset">
+				<div class="tabset_title" data-id="${tabset.id}">
+					<span class="tabset_title_expand">
+						<span class="tabset_expand_text">+</span>
+					</span>
+					<span class="tabset_title_text_wrapper">
+						<span class="tabset_title_text" data-id="${tabset.id}">${tabset.title}</span>
+						<span class="tabset_title_delete" data-id="${tabset.id}">X</span>
+					</span>
+			</div>
+				<div class="tabset_items">`;
+        for(let child of tabset.children){
+            tabset_url.urls.push(child.url);
+            htmlInsert += `<div class="tabset_item" data-url="${child.url}">
+						<div class="tabset_item_wrapper">
+							<div class="tabset_item_title" data-url="${child.url}">${child.title}</div>
+							<div class="tabset_item_url" data-url="${child.url}">${child.url}</div>
+						</div>
+						<div class="tabset_item_delete" data-id="${child.id}">X</div>
+					</div>`
+        }
+        htmlInsert += `</div>
+			</div>`
+        tabset_urls.push(tabset_url);
+    }
+    $("#tabset_display").html(htmlInsert);
 
-
-
-
-
-
-    // ToDo: Add document nodes before this listener
-    $(".tabset .tabset_title_expand").each(function(idx){
+    // Listeners
+    $(".tabset_title_expand").each(function(idx){
         $(this).bind("click", function(){
             $(this).children().each(function(){
                 if($(this).text() === "+"){
@@ -256,6 +213,58 @@ window.onload = function () {
                 }
             }) ;
         });
+    });
+
+    $(".tabset_title_delete").on("click", (evt)=>{
+        chrome.runtime.sendMessage({type:"delete_tabset",payload: $(evt.target).attr("data-id")}, function(response) {
+        });
+        window.location.reload();
+    });
+
+    $(".tabset_item_delete").on("click", (evt)=>{
+        chrome.runtime.sendMessage({type: "delete_tabset_item",payload: $(evt.target).attr("data-id")}, function(response) {
+        });
+        window.location.reload();
+    });
+    $(".tabset").on("click", (evt)=>{
+        for(let data of tabset_urls){
+            if(data.id === $(evt.target).attr("data-id")){
+                for(let url of data.urls){
+                    openTab(url);
+                }
+                close();
+            }
+        }
+    });
+    $(".tabset_item").on("click", (evt)=>{
+        replaceTab($(evt.target).attr("data-url"));
+    });
+
+}
+window.onload = function () {
+    chrome.runtime.sendMessage({type: "ready"}, function(response) {
+        createTabsetItems(response.payload)
+    });
+
+
+
+    //var createbutton = document.getElementById('btnCreateSearchSet');
+    //createbutton.addEventListener('click', function (e) {
+    //    e.preventDefault();
+    //    var objQueryInfo = {
+    //        windowType: "normal"
+    //    };
+    //    chrome.runtime.getBackgroundPage(function (bgPage) {
+    //        chrome.tabs.query(objQueryInfo, function (tabArray) {
+    //            console.log(tabArray);
+    //            replaceTab('searchsets.html');
+    //        });
+    //    });
+    //});
+    var createtabsetbutton = document.getElementById('btnCreateTabSet');
+    createtabsetbutton.addEventListener('click', function (e) {
+        e.preventDefault();
+        replaceTab('tabsets.html');
     });
 
     // initialize search pane
@@ -286,15 +295,6 @@ window.onload = function () {
             }
         }
     });
-
-
-    chrome.runtime.sendMessage({type: "delete_tabset"}, function(response) {
-        console.log(response.type);
-    });
-    chrome.runtime.sendMessage({type: "delete_tabset_item"}, function(response) {
-        console.log(response.type);
-    });
-
 
     // display links
     chrome.topSites.get(displayTopSites);
