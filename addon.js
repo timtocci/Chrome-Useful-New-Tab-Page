@@ -206,7 +206,18 @@ function hideTabsetItems(index){
         }
     });
 }
+
+function createTabsetItems(itemsData){
+
+}
 window.onload = function () {
+    chrome.runtime.sendMessage({type: "ready"}, function(response) {
+        console.log(response.type);
+        console.log(response.payload);
+    });
+
+
+
     var createbutton = document.getElementById('btnCreateSearchSet');
     createbutton.addEventListener('click', function (e) {
         e.preventDefault();
@@ -276,9 +287,7 @@ window.onload = function () {
         }
     });
 
-    chrome.runtime.sendMessage({type: "ready"}, function(response) {
-        console.log(response.type);
-    });
+
     chrome.runtime.sendMessage({type: "delete_tabset"}, function(response) {
         console.log(response.type);
     });

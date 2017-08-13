@@ -121,8 +121,10 @@ $( document ).ready(function() {
             });
             console.log(tabset_data);
             chrome.runtime.sendMessage({type: "create_tabset", payload: tabset_data}, function(response) {
-                console.log(response.type);
+                console.log(response);
+                close();
             });
+
         });
     });
 

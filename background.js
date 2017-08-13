@@ -182,10 +182,12 @@ class TabSets extends Emitter {
                     for (let child of children) {
                         if (child.title = "tabsets") {
                             this.tabsets_folder = child;
-                            chrome.bookmarks.getChildren(child.id, (tss)=> {
-                                this.TABSETS = tss;
-                                // get children of each
-                                this.emit("ready", tss);
+                            chrome.bookmarks.getSubTree(child.id, (tss)=> {
+                                for (let ts of tss) {
+                                    if (ts.title === "tabsets") {
+                                        this.emit("ready", ts.children);
+                                    }
+                                }
                             })
                         }
                     }
@@ -194,16 +196,36 @@ class TabSets extends Emitter {
         })
     }
 
-    CreateTabSet(tabsetData) {
+    CreateTabSet(TabSetData) {
+        let tabset_folder = {
+            parentId: this.tabsets_folder.id,
+            title: TabSetData.name
+        };
+        chrome.bookmarks.create(tabset_folder, (folder)=> {
+            for (let link of TabSetData.items) {
+                let url = {
+                    parentId: folder.id,
+                    title: link.title,
+                    url: link.url
+                }
+                chrome.bookmarks.create(url, (tabset_item)=> {
+                    this.emit("tabset_created")
+                });
+            }
 
+        });
     }
 
-    DeleteTabSet(tabsetId) {
-
+    DeleteTabSet(TabSetId) {
+        chrome.bookmarks.removeTree(TabSetId, ()=> {
+            this.emit("tabset_deleted");
+        })
     }
 
-    DeleteTabSetURL(URLId) {
-
+    DeleteTabSetItem(ItemId) {
+        chrome.bookmarks.remove(ItemId, ()=> {
+            this.emit("tabset_item_deleted");
+        })
     }
 }
 
@@ -223,6 +245,7 @@ chrome.runtime.onInstalled.addListener((details)=> {
             break;
     }
 });
+
 function setDefaultOptionsData() {
     chrome.storage.sync.set({
         "optionsmenudata": [{
@@ -688,22 +711,33 @@ function setupTabSets() {
 
 chrome.runtime.onMessage.addListener(
     function (msg, sender, sendResponse) {
+        let tabsets = new TabSets();
         switch (msg.type) {
             case "ready":
                 //
-                sendResponse({type:"ready_response"});
+                tabsets.on("ready", (data)=> {
+                    sendResponse({type: "ready_response", payload: data});
+                });
+
                 break;
             case "create_tabset":
                 //
-                sendResponse({type:"create_tabset_response"});
+                tabsets = new TabSets();
+                tabsets.on("ready", ()=> {
+                    tabsets.CreateTabSet(msg.payload, function(ts) {
+                        sendResponse({type: "create_tabset_response", payload: ts});
+                    });
+                });
+
+
                 break;
             case "delete_tabset":
                 //
-                sendResponse({type:"delete_tabset_response"});
+                sendResponse({type: "delete_tabset_response"});
                 break;
             case "delete_tabset_item":
                 //
-                sendResponse({type:"delete_tabset_item_response"});
+                sendResponse({type: "delete_tabset_item_response"});
                 break
         }
         // async response
