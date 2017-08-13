@@ -216,6 +216,7 @@ function createTabsetItems(itemsData){
     });
 
     $(".tabset_title_delete").on("click", (evt)=>{
+        evt.stopPropagation();
         chrome.runtime.sendMessage({type:"delete_tabset",payload: $(evt.target).attr("data-id")}, function(response) {
         });
         window.location.reload();
