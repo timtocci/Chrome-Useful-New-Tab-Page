@@ -169,11 +169,17 @@ function createTabsetItems(itemsData){
     let htmlInsert = ``;
     let tabset_urls = [];
     for(let tabset of itemsData){
-        let tabset_url = {
-            id:tabset.id,
-            urls:[]
-        };
-        htmlInsert += `<div class="tabset">
+        if(tabset.url){
+            console.warn(`Link: '${tabset.title}', probably misplaced in __private_newtabpage/tabsets`);
+            chrome.bookmarks.move(tabset.id,{parentId:"2"});
+            console.warn(`Moved:'${tabset.title}', to 'Other bookmarks' folder`);
+
+        }else{
+            let tabset_url = {
+                id:tabset.id,
+                urls:[]
+            };
+            htmlInsert += `<div class="tabset">
 				<div class="tabset_title" data-id="${tabset.id}">
 					<span class="tabset_title_expand">
 						<span class="tabset_expand_text">+</span>
@@ -184,19 +190,28 @@ function createTabsetItems(itemsData){
 					</span>
 			</div>
 				<div class="tabset_items">`;
-        for(let child of tabset.children){
-            tabset_url.urls.push(child.url);
-            htmlInsert += `<div class="tabset_item" data-url="${child.url}">
+
+            for(let child of tabset.children){
+                if(!child.url){
+                    console.warn(`Folder: '${child.title}', probably misplaced in __private_newtabpage/tabsets`);
+                    chrome.bookmarks.move(child.id,{parentId:"2"});
+                    console.warn(`Moved:'${child.title}', to 'Other bookmarks' folder`);
+
+                }
+                tabset_url.urls.push(child.url);
+                htmlInsert += `<div class="tabset_item" data-url="${child.url}">
 						<div class="tabset_item_wrapper">
 							<div class="tabset_item_title" data-url="${child.url}">${child.title}</div>
 							<div class="tabset_item_url" data-url="${child.url}">${child.url}</div>
 						</div>
 						<div class="tabset_item_delete" data-id="${child.id}">X</div>
 					</div>`
-        }
-        htmlInsert += `</div>
+            }
+            htmlInsert += `</div>
 			</div>`
-        tabset_urls.push(tabset_url);
+            tabset_urls.push(tabset_url);
+        }
+
     }
     $("#tabset_display").html(htmlInsert);
 
