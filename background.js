@@ -177,22 +177,28 @@ class TabSets extends Emitter {
     constructor() {
         super();
         chrome.bookmarks.search("__private_newtabpage", (results)=> {
-            for (let fldr of results) {
-                chrome.bookmarks.getChildren(fldr.id, (children)=> {
-                    for (let child of children) {
-                        if (child.title = "tabsets") {
-                            this.tabsets_folder = child;
-                            chrome.bookmarks.getSubTree(child.id, (tss)=> {
-                                for (let ts of tss) {
-                                    if (ts.title === "tabsets") {
-                                        this.emit("ready", ts.children);
+            if(results.length === 0){
+                setupTabSets();
+                this.emit("ready", []);
+            }else{
+                for (let fldr of results) {
+                    chrome.bookmarks.getChildren(fldr.id, (children)=> {
+                        for (let child of children) {
+                            if (child.title = "tabsets") {
+                                this.tabsets_folder = child;
+                                chrome.bookmarks.getSubTree(child.id, (tss)=> {
+                                    for (let ts of tss) {
+                                        if (ts.title === "tabsets") {
+                                            this.emit("ready", ts.children);
+                                        }
                                     }
-                                }
-                            })
+                                })
+                            }
                         }
-                    }
-                })
+                    })
+                }
             }
+
         })
     }
 
@@ -233,9 +239,11 @@ chrome.runtime.onInstalled.addListener((details)=> {
     switch (details.reason) {
         case "install":
             setDefaultOptionsData();
+
             break;
         case "update":
             setDefaultOptionsData();
+
             break;
         case "chromeupdate":
             // browser update - do nothing
