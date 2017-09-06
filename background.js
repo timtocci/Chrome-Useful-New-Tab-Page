@@ -1,270 +1,5 @@
 'use strict';
-// https://raw.githubusercontent.com/pazguille/emitter-es6/master/index.js
-/**
- * Creates a new instance of Emitter.
- * @class
- * @returns {Object} emitter - An instance of Emitter.
- * @example
- * var emitter = new Emitter();
- */
-class Emitter {
-
-    constructor() {
-        this._events = {};
-    }
-
-;
-
-    /**
-     * Adds a listener to the collection for a specified event.
-     * @public
-     * @function
-     * @name Emitter#on
-     * @param {String} event - Event name.
-     * @param {Function} listener - Listener function.
-     * @returns {Object} emitter
-     * @example
-     * emitter.on('ready', listener);
-     */
-    on(event, listener) {
-        this._events[event] = this._events[event] || [];
-        this._events[event].push(listener);
-        return this;
-    }
-
-;
-
-    /**
-     * Adds a one time listener to the collection for a specified event. It will execute only once.
-     * @public
-     * @function
-     * @name Emitter#once
-     * @param {String} event - Event name.
-     * @param {Function} listener - Listener function.
-     * @returns {Object} emitter
-     * @example
-     * me.once('contentLoad', listener);
-     */
-    once(event, listener) {
-        let that = this;
-
-        function fn() {
-            that.off(event, fn);
-            listener.apply(this, arguments);
-        }
-
-        fn.listener = listener;
-
-        this.on(event, fn);
-
-        return this;
-    }
-
-;
-
-    /**
-     * Removes a listener from the collection for a specified event.
-     * @public
-     * @function
-     * @name Emitter#off
-     * @param {String} event - Event name.
-     * @param {Function} listener -  Listener function.
-     * @returns {Object} emitter
-     * @example
-     * me.off('ready', listener);
-     */
-    off(event, listener) {
-        let listeners = this._events[event];
-
-        if (listeners !== undefined) {
-            for (let j = 0; j < listeners.length; j += 1) {
-                if (listeners[j] === listener || listeners[j].listener === listener) {
-                    listeners.splice(j, 1);
-                    break;
-                }
-            }
-
-            if (listeners.length === 0) {
-                this.removeAllListeners(event);
-            }
-        }
-
-        return this;
-    }
-
-;
-
-    /**
-     * Removes all listeners from the collection for a specified event.
-     * @public
-     * @function
-     * @name Emitter#removeAllListeners
-     * @param {String} event - Event name.
-     * @returns {Object} emitter
-     * @example
-     * me.removeAllListeners('ready');
-     */
-    removeAllListeners(event) {
-        try {
-            delete this._events[event];
-        } catch (e) {
-        }
-
-        return this;
-    }
-
-;
-
-    /**
-     * Returns all listeners from the collection for a specified event.
-     * @public
-     * @function
-     * @name Emitter#listeners
-     * @param {String} event - Event name.
-     * @returns {Array}
-     * @example
-     * me.listeners('ready');
-     */
-    listeners(event) {
-        try {
-            return this._events[event];
-        } catch (e) {
-        }
-    }
-
-;
-
-    /**
-     * Execute each item in the listener collection in order with the specified data.
-     * @name Emitter#emit
-     * @public
-     * @function
-     * @param {String} event - The name of the event you want to emit.
-     * @param {...args} [args] - Data to pass to the listeners.
-     * @example
-     * me.emit('ready', 'param1', {..}, [...]);
-     */
-    emit() {
-        let args = [].slice.call(arguments, 0); // converted to array
-        let event = args.shift();
-        let listeners = this._events[event];
-
-        if (listeners !== undefined) {
-            listeners = listeners.slice(0);
-            let len = listeners.length;
-            for (let i = 0; i < len; i += 1) {
-                listeners[i].apply(this, args);
-            }
-        }
-
-        return this;
-    }
-
-;
-
-}
-
-/**
- * Exports Emitter
-
- export default Emitter;*/
-
-
-/**
- * TabSets Class
- */
-class TabSets extends Emitter {
-    constructor() {
-        super();
-        chrome.bookmarks.search("__private_newtabpage", (results)=> {
-            if(results.length === 0){
-                setupTabSets();
-                this.emit("ready", []);
-            }else{
-                for (let fldr of results) {
-                    chrome.bookmarks.getChildren(fldr.id, (children)=> {
-                        for (let child of children) {
-                            if (child.title = "tabsets") {
-                                this.tabsets_folder = child;
-                                chrome.bookmarks.getSubTree(child.id, (tss)=> {
-                                    for (let ts of tss) {
-                                        if (ts.title === "tabsets") {
-                                            this.emit("ready", ts.children);
-                                        }
-                                    }
-                                })
-                            }
-                        }
-                    })
-                }
-            }
-
-        })
-    }
-
-    CreateTabSet(TabSetData) {
-        let tabset_folder = {
-            parentId: this.tabsets_folder.id,
-            title: TabSetData.name
-        };
-        chrome.bookmarks.create(tabset_folder, (folder)=> {
-            for (let link of TabSetData.items) {
-                let url = {
-                    parentId: folder.id,
-                    title: link.title,
-                    url: link.url
-                }
-                chrome.bookmarks.create(url, (tabset_item)=> {
-                    this.emit("tabset_created")
-                });
-            }
-
-        });
-    }
-
-    DeleteTabSet(TabSetId) {
-        chrome.bookmarks.removeTree(TabSetId, ()=> {
-            this.emit("tabset_deleted");
-        })
-    }
-
-    DeleteTabSetItem(ItemId) {
-        chrome.bookmarks.remove(ItemId, ()=> {
-            this.emit("tabset_item_deleted");
-        })
-    }
-}
-
-chrome.runtime.onInstalled.addListener((details)=> {
-    switch (details.reason) {
-        case "install":
-            setDefaultOptionsData();
-
-            break;
-        case "update":
-            setDefaultOptionsData();
-
-            break;
-        case "chromeupdate":
-            // browser update - do nothing
-            break;
-        default:
-            setDefaultOptionsData();
-            break;
-    }
-});
-
-function setDefaultOptionsData() {
-    chrome.storage.sync.set({
-        "optionsmenudata": [{
-            item: "OpenMenu",
-            active: 1
-        }]
-    }, ()=> {
-    });
-}
-
-
+let tabsets_folder;
 // Open Menu Handlers
 function openBookmarks(i, t) {
     const createProperties = {url: "chrome://bookmarks"};
@@ -366,7 +101,7 @@ function setInactive(menu) {
 }
 
 // Default SearchSet Array
-var searchArray = [
+let searchArray = [
     {
         id: "cbGoogle",
         category: "Web Search",
@@ -676,21 +411,13 @@ var searchArray = [
         url: ["http://imgur.com/search?q="]
     }
 ];
-var search_item_collection = {
+let search_item_collection = {
     version: 0,
     items: searchArray
 };
 
 
 // TabSets
-function getTabSets() {
-}
-function getTabSet(name) {
-}
-function setTabSet(tabset) {
-}
-
-let suTS;
 function setupTabSets() {
     let bookmarksBar;
     chrome.bookmarks.getTree(function (nodesArr) {
@@ -716,56 +443,67 @@ function setupTabSets() {
         })
     });
 }
-
+// messaging
 chrome.runtime.onMessage.addListener(
     function (msg, sender, sendResponse) {
-        let tabsets = new TabSets();
         switch (msg.type) {
             case "ready":
-                //
-                tabsets.on("ready", (data)=> {
-                    sendResponse({type: "ready_response", payload: data});
+                chrome.bookmarks.search("__private_newtabpage", (results)=> {
+                    if(results.length === 0){
+                        setupTabSets();
+                        sendResponse({type: "ready_response", payload: []});
+                    }else{
+                        for (let fldr of results) {
+                            chrome.bookmarks.getChildren(fldr.id, (children)=> {
+                                for (let child of children) {
+                                    if (child.title = "tabsets") {
+                                        tabsets_folder = child;
+                                        chrome.bookmarks.getSubTree(child.id, (tss)=> {
+                                            for (let ts of tss) {
+                                                if (ts.title === "tabsets") {
+                                                    sendResponse({type: "ready_response", payload: ts.children});
+                                                }
+                                            }
+                                        })
+                                    }
+                                }
+                            })
+                        }
+                    }
                 });
 
                 break;
             case "create_tabset":
-                //
-                tabsets = new TabSets();
-                tabsets.on("ready", ()=> {
-                    tabsets.CreateTabSet(msg.payload, function(ts) {
-                        sendResponse({type: "create_tabset_response", payload: ts});
-                    });
+                let tabset_folder = {
+                    parentId: tabsets_folder.id,
+                    title: msg.payload.name
+                };
+                chrome.bookmarks.create(tabset_folder, (folder)=> {
+                    for (let link of msg.payload.items) {
+                        let url = {
+                            parentId: folder.id,
+                            title: link.title,
+                            url: link.url
+                        };
+                        chrome.bookmarks.create(url, ()=> {});
+                    }
                 });
-
 
                 break;
             case "delete_tabset":
-                //
-                tabsets = new TabSets();
-                tabsets.on("ready", ()=> {
-                    tabsets.DeleteTabSet(msg.payload, function(ts) {
-                        sendResponse({type: "delete_tabset_response", payload: ts});
-                    });
+                chrome.bookmarks.removeTree(msg.payload, ()=> {
+                    sendResponse({type: "delete_tabset_response", payload: []});
                 });
+
                 break;
             case "delete_tabset_item":
-                //
-                tabsets = new TabSets();
-                tabsets.on("ready", ()=> {
-                    tabsets.DeleteTabSetItem(msg.payload, function(ts) {
-                        sendResponse({type: "delete_tabset_item_response", payload: ts});
-                    });
+                chrome.bookmarks.remove(msg.payload, ()=> {
+                    sendResponse({type: "delete_tabset_item_response", payload: []});
                 });
+
                 break
         }
         // async response
         return true;
     }
 );
-
-
-//setupTabSets();
-//tabsets.on("ready",(data)=>{
-//    console.log(data)
-//
-//});
