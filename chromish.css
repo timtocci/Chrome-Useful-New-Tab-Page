@@ -171,31 +171,3 @@ button {
 
 
 
-
-#btnCreateTabSet{
-    width: 100%;
-    background-image:none;
-    text-decoration: underline;
-}
-#tabsetdisplay > button{
-    text-align: right;
-    width:100%;
-    background-color: rgb(221, 221, 221);
-}
-#txtSearch{
-    border-radius: 0px;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.urllist{
-
-}
-.urllist > ul{
-    padding-left: 10px;
-    margin-left: 10px;
-}
-.urllist > ul > li{
-    list-style: none;
-    border-bottom: 1px solid white;
-}
