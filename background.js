@@ -415,7 +415,9 @@ let search_item_collection = {
     version: 0,
     items: searchArray
 };
-
+function getSearchItems(){
+    return search_item_collection;
+}
 
 // TabSets
 function setupTabSets() {

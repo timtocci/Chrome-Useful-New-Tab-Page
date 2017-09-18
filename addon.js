@@ -113,7 +113,7 @@ function initializeNavMenu() {
 function initializeSearch() {
     chrome.runtime.getBackgroundPage(function (bgPage) {
         // bypass data version check for now
-        search_items_array = bgPage.search_item_collection.items;
+        search_items_array = bgPage.getSearchItems().items;
         var categoryArr = [];
         var inserthtml = "";
         // fill the category array
