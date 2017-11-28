@@ -72,6 +72,8 @@ let internal_titles = [
 ];
 
 $( document ).ready(function() {
+    $("#tabsetName")[0].value = getCurrentDateString();
+    $("#tabsetName")[0].select();
     let objQueryInfo = {
         windowType: "normal"
     };
@@ -128,3 +130,24 @@ $( document ).ready(function() {
     });
 
 });
+function getCurrentDateString(){
+    let d = new Date();
+    let day = d.getDate();
+    let month = d.getMonth() + 1;
+    let year = d.getFullYear();
+    let hour = d.getHours();
+    let minutes = d.getMinutes();
+    if (day < 10) {
+        day = "0" + day;
+    }
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if(hour < 10){
+        hour = "0" + hour;
+    }
+    if(minutes < 10){
+        minutes = "0" + minutes;
+    }
+    return year + "-" + month + "-" + day + "-" + hour + ":" + minutes;
+}
