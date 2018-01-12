@@ -129,7 +129,17 @@ $( document ).ready(function() {
         });
     });
 
+    var links = document.getElementsByClassName('chromeurls');
+
+    for (i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', onChromeUrlClick);
+    }
 });
+function onChromeUrlClick(e) {
+    e.preventDefault();
+    chrome.tabs.create({url: e.srcElement.href});
+    return false;
+}
 function getCurrentDateString(){
     let d = new Date();
     let day = d.getDate();
